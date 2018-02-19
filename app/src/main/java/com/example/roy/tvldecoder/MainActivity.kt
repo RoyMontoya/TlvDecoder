@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             "9F12" to EMVTag("Application Preferred Name", true),
             "9F06" to EMVTag("Application Identifier (AID) – terminal", false),
             "5F30" to EMVTag("Service Code", false),
-            "9F4E" to EMVTag("Merchant Name and Location", true),
+            "9F4E" to EMVTag("Merchant Name and git Location", true),
             "5A" to EMVTag("Application Primary Account Number (PAN)", false),
             "57" to EMVTag("Track 2 Equivalent Data", false),
             "9F10" to EMVTag("Issuer Application Data", false),
