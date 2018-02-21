@@ -17,7 +17,7 @@ class HexConversion {
                 output.append(Integer.parseInt(str, 16).toChar())
                 i += 2
             }
-            return output.toString()
+            return output.toString().replace(" ", "")
         }
 
     }
