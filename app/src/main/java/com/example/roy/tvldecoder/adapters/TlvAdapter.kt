@@ -1,4 +1,4 @@
-package com.example.roy.tvldecoder
+package com.example.roy.tvldecoder.adapters
 
 import android.content.Context
 import android.support.annotation.LayoutRes
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.roy.tvldecoder.R
+import com.example.roy.tvldecoder.model.Tlv
 
 /**
  * Created by Roy on 2/19/18.

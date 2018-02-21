@@ -1,4 +1,6 @@
-package com.example.roy.tvldecoder
+package com.example.roy.tvldecoder.store
+
+import com.example.roy.tvldecoder.model.EMVTag
 
 /**
  * Created by Roy on 2/18/18.

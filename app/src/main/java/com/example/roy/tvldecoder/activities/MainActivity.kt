@@ -1,10 +1,12 @@
-package com.example.roy.tvldecoder
+package com.example.roy.tvldecoder.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.example.roy.tvldecoder.TlvDecoder.Companion.parseString
+import com.example.roy.tvldecoder.R
+import com.example.roy.tvldecoder.adapters.TlvAdapter
+import com.example.roy.tvldecoder.utils.TlvDecoder.Companion.parseString
 
 class MainActivity : AppCompatActivity() {
 

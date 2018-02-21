@@ -1,4 +1,7 @@
-package com.example.roy.tvldecoder
+package com.example.roy.tvldecoder.utils
+
+import com.example.roy.tvldecoder.model.Tlv
+import com.example.roy.tvldecoder.store.EMVTagStore
 
 /**
  * Created by Roy on 2/20/18.
@@ -27,9 +30,9 @@ class TlvDecoder {
             tlvList.add(tlv)
 
 
-            if (stringToParse.isNotEmpty() && stringToParse.length > 3) {
+            if (stringToParse.length > 3) {
                 parseString(stringToParse)
-            } else {
+            } else if (stringToParse.isNotEmpty()){
                 tlvList.add(Tlv("", "Failed to Parse",
                         stringToParse, 0))
             }
@@ -45,7 +48,6 @@ class TlvDecoder {
             return Tlv(tag, emvTag?.name ?: "Unknown Tag",
                     if (emvTag?.encoded ?: false) HexConversion.ToAscii(tlvValue) else tlvValue,
                     tlvValue.length)
-
         }
 
         private fun getValueLength(remainingString: String): Int =

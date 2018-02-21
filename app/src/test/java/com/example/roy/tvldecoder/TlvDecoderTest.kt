@@ -1,5 +1,8 @@
 package com.example.roy.tvldecoder
 
+import com.example.roy.tvldecoder.model.Tlv
+import com.example.roy.tvldecoder.store.EMVTagStore
+import com.example.roy.tvldecoder.utils.TlvDecoder
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -7,7 +10,12 @@ import org.junit.Test
 /**
  * Created by Roy on 2/20/18.
  */
-class TlvDecoderTest{
+class TlvDecoderTest {
+
+    @Before
+    fun setUp() {
+        TlvDecoder.tlvList = mutableListOf<Tlv>()
+    }
 
     @Test
     fun decodeOneTlvTagTest() {
@@ -20,7 +28,7 @@ class TlvDecoderTest{
     }
 
     @Test
-    fun emptyStringDoesNotCreateTlvTagTest(){
+    fun emptyStringDoesNotCreateTlvTagTest() {
         //given
         val stringToDecode = ""
         //when
@@ -33,7 +41,7 @@ class TlvDecoderTest{
     fun decodeKnownTlvTest() {
         //given
         val stringToDecode = "5F201A54444320424C41434B20554E4C494D4954454420564953412020"
-        val tagMeaning = EMVTagStore.emvMap.get(stringToDecode.substring(0,4))?.name
+        val tagMeaning = EMVTagStore.emvMap.get(stringToDecode.substring(0, 4))?.name
         //when
         val list = TlvDecoder.parseString(stringToDecode)
         //assert
@@ -41,7 +49,7 @@ class TlvDecoderTest{
     }
 
     @Test
-    fun decodeUnknownTlvTest(){
+    fun decodeUnknownTlvTest() {
         //given
         val stringToDecode = "CC00"
         val tagMeaning = "Unknown Tag"
@@ -50,18 +58,5 @@ class TlvDecoderTest{
         //assert
         Assert.assertEquals(tagMeaning, list.get(0).tagMeaning)
     }
-
-//    @Test
-//    fun decodeShortStringTest() {
-//        //given
-//        val stringToDecode = "C"
-//        val tagMeaning = "Failed to Parse"
-//        //when
-//        val list = TlvDecoder.parseString(stringToDecode)
-//        //assert
-//        Assert.assertEquals(list.get(0).tagMeaning, tagMeaning)
-//    }
-
-
 
 }

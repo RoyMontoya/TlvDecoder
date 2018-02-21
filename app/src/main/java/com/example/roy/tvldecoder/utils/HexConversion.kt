@@ -1,4 +1,4 @@
-package com.example.roy.tvldecoder
+package com.example.roy.tvldecoder.utils
 
 /**
  * Created by Roy on 2/19/18.
