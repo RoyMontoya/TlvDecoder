@@ -29,7 +29,6 @@ class TlvDecoder {
             }
             tlvList.add(tlv)
 
-
             if (stringToParse.length > 3) {
                 parseString(stringToParse)
             } else if (stringToParse.isNotEmpty()){
