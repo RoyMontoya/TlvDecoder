@@ -14,11 +14,11 @@ import android.widget.TextView
 
 class TlvAdapter : RecyclerView.Adapter<TlvAdapter.TlvHolder> {
 
-    private var tlvList = ArrayList<Tlv>()
+    var tlvList: MutableList<Tlv> = mutableListOf<Tlv>()
     private var context: Context? = null
 
-    constructor(context: Context, tvlList: ArrayList<Tlv>) : super() {
-        this.tlvList = tvlList
+    constructor(context: Context, elements: MutableList<Tlv>) : super() {
+        this.tlvList.addAll(elements)
         this.context = context
     }
 
@@ -64,6 +64,4 @@ class TlvAdapter : RecyclerView.Adapter<TlvAdapter.TlvHolder> {
         return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
     }
 
-
 }
-
