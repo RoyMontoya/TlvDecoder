@@ -15,26 +15,22 @@ class TlvDecoder {
 
         fun parseString(stringToDecode: String): MutableList<Tlv> {
             if (stringToDecode.isEmpty()) return tlvList
+            if (stringToDecode.length < 4) {
+                tlvList.add(createFailedToParseTlvTag(stringToDecode))
+                return tlvList
+            }
             var stringToParse = stringToDecode
             val mediumTag = stringToParse.substring(0..3)
             val smallTag = stringToParse.substring(0..1)
             val tlv: Tlv
 
-            if (EMVTagStore.emvMap.containsKey(mediumTag)) {
-                tlv = createTlv(stringToParse, mediumTag)
-                stringToParse = stringToParse.substring(mediumTag.length + lengthTagLength + tlv.hexValueLength)
-            } else {
-                tlv = createTlv(stringToParse, smallTag)
-                stringToParse = stringToParse.substring(smallTag.length + lengthTagLength + tlv.hexValueLength)
-            }
+            tlv = if (EMVTagStore.emvMap.containsKey(mediumTag)) createTlv(stringToParse, mediumTag)
+            else createTlv(stringToParse, smallTag)
+
+            stringToParse = stringToParse.substring(tlv.tag.length + lengthTagLength + tlv.hexValueLength)
             tlvList.add(tlv)
 
-            if (stringToParse.length > 3) {
-                parseString(stringToParse)
-            } else if (stringToParse.isNotEmpty()){
-                tlvList.add(Tlv("", "Failed to Parse",
-                        stringToParse, 0))
-            }
+            if (stringToParse.isNotEmpty()) parseString(stringToParse)
 
             return tlvList
         }
@@ -51,6 +47,11 @@ class TlvDecoder {
 
         private fun getValueLength(remainingString: String): Int =
                 HexConversion.ToInt(remainingString.substring(0..1)) + lengthTagLength
+
+        private fun createFailedToParseTlvTag(stringToParse: String): Tlv {
+            return Tlv("", "Failed to Parse",
+                    stringToParse, 0)
+        }
 
     }
 

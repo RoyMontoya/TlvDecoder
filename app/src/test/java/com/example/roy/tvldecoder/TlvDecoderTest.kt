@@ -59,4 +59,15 @@ class TlvDecoderTest {
         Assert.assertEquals(tagMeaning, list.get(0).tagMeaning)
     }
 
+    @Test
+    fun invalidStringCreateFailedTag() {
+        //given
+        val stringToDecode = "CCC"
+        val tagMeaning = "Failed to Parse"
+        //when
+        val list = TlvDecoder.parseString(stringToDecode)
+        //assert
+        Assert.assertEquals(tagMeaning, list.get(0).tagMeaning)
+    }
+
 }
