@@ -53,6 +53,14 @@ class TlvDecoder {
                     stringToParse, 0)
         }
 
+        private fun isLengthValid(stringToParse: String): Boolean {
+            if (stringToParse.length >= 2) {
+                val length = HexConversion.ToInt(stringToParse.substring(0, 2))
+                return (length >= stringToParse.length - 2)
+            }
+            return false
+        }
+
     }
 
 }
